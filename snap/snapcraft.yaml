@@ -1,0 +1,24 @@
+name: boa-cli # you probably want to 'snapcraft register <name>'
+base: core22 # the base snap is the execution environment for this snap
+version: '0.1' # Not sure 
+summary: CLI interpreter based on the Boa ECMAScript engine
+description: |
+  This is the CLI interpreter for the Boa ECMAScript engine. It offers
+  the most basic example of an event loop implemented for Boa, covering
+  85% of the ECMAScript specification, including things such as Atomics or Intl.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+parts:
+  boa-cli:
+    plugin: rust
+    source-type: git
+    source: https://github.com/boa-dev/boa
+    source-tag: v0.18
+    rust-path:
+      - cli
+
+apps:
+  boa-cli:
+    command: bin/boa
